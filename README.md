@@ -19,49 +19,47 @@ End-to-end, resume-grade project that ingests anonymized study datasets, harmoni
 ## Setup
 ```bash
 python -m venv .venv
-.venv\Scripts\activate   # Windows
+.venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-## Run the data + ML pipeline
-```bash
+Run the data + ML pipeline
 python -m src.pipeline
-```
-Outputs (Power BI-ready) are written to `outputs/`:
-- `site_features.csv` / `site_features.parquet`: engineered site metrics + rule-based labels.
-- `site_risk_predictions.csv`: model predictions, probabilities, alerts, insights.
-- `site_ai_insights.csv`: concise insight feed for the UI/Power BI.
-- `model_metrics.json`: ROC AUC, accuracy, dataset sizes, features used.
 
-## Run the Flask website
-```bash
+Run the Flask website
 set FLASK_APP=app.main
 flask run
-# then open http://127.0.0.1:5000
-```
-Pages:
-- **Home:** problem/solution and top AI insights.
-- **Architecture:** system overview.
-- **AI Workflow:** step-by-step data & ML flow.
-- **Results:** model quality and sample predictions.
-- **Dashboard:** iframe placeholder to embed/publish your Power BI report + live insights.
 
-## Power BI integration
-- In Power BI Desktop, import `outputs/site_risk_predictions.csv` or `site_features.parquet`.
-- Build visuals (risk trend, alert counts, SAE vs. backlog).
-- Publish and replace the placeholder embed URL in `app/templates/dashboard.html`.
+Power BI integration
 
-## Explainability & governance
-- Rule-based labels give transparent training targets.
-- Logistic regression coefficients (inspect via Spark) keep drivers interpretable.
-- Agentic layer emits deterministic alert reasons; generative layer provides concise English summaries (no external LLM calls).
+Import outputs/site_risk_predictions.csv or site_features.parquet
 
-## Repository layout
-- `src/`: ingestion, features, ML, insights, pipeline.
-- `app/`: Flask app, templates, and static assets.
-- `outputs/`: generated analytics/ML exports (created after running the pipeline).
-- `requirements.txt`: Python dependencies.
+Build visuals and publish
 
-## Notes
-- If new study folders are added under `QC Anonymized Study Files/`, rerun `python -m src.pipeline`.
-- For large datasets, ensure sufficient memory; PySpark Arrow conversion is enabled for speed.
+Embed the report in app/templates/dashboard.html
+
+Explainability & governance
+
+Rule-based labels for transparency
+
+Logistic regression for interpretability
+
+Deterministic alerts + concise AI summaries
+
+Repository layout
+
+src/ – data, features, ML, insights
+
+app/ – Flask UI
+
+outputs/ – Power BI-ready exports
+
+
+---
+
+### 3️⃣ SAVE AND CLOSE Notepad  
+Press **Ctrl + S**, then close.
+
+---
+
+### 4️⃣ Mark conflict as resolved
+```bash
+git add README.md
