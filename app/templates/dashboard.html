@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>Dashboard</h1>
+  <p>Connect the exported CSV/Parquet files in <code>outputs/</code> to Power BI. Replace the embed link below with your published report URL.</p>
+  <div class="embed">
+    <iframe src="{{ power_bi_url }}" title="Power BI Dashboard" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section>
+  <h2>Live AI Insights</h2>
+  <div id="insights-panel"></div>
+</section>
+{% endblock %}
+

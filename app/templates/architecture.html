@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>Architecture</h1>
+  <p>A modular, GitHub-ready stack that runs locally:</p>
+  <ul class="bullets">
+    <li>PySpark ingestion layer reads anonymized Excel sources per study.</li>
+    <li>Feature engineering harmonizes subject-to-site mappings and computes operational metrics.</li>
+    <li>Interpretable ML with logistic regression, driven by heuristic labels.</li>
+    <li>Generative explanation + agentic alert layers produce human-friendly guidance.</li>
+    <li>Flask web UI + Power BI-ready exports (CSV & Parquet).</li>
+  </ul>
+  <div class="diagram">
+    <div class="box">Raw Excel (CPID, EDRR, SAE, Coding, Missing Pages/Labs)</div>
+    <div class="arrow">→</div>
+    <div class="box">PySpark Harmonization</div>
+    <div class="arrow">→</div>
+    <div class="box">Site Features</div>
+    <div class="arrow">→</div>
+    <div class="box">Rule Labels + Logistic Regression</div>
+    <div class="arrow">→</div>
+    <div class="box">Insights & Alerts</div>
+    <div class="arrow">→</div>
+    <div class="box">Web UI & Power BI</div>
+  </div>
+</section>
+{% endblock %}
+

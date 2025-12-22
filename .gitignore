@@ -1,0 +1,26 @@
+# Ignore raw datasets
+data/
+*.xlsx
+*.csv
+
+# Spark / Python
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+# Ignore provided datasets (VERY IMPORTANT)
+6932c39b908b6_detailed_problem_statements_and_datasets/
+
+# Ignore all raw data files
+*.xlsx
+*.csv
+
+# Python / Spark
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">AI-Driven Clinical Trial Intelligence Platform</p>
+    <h1>Reduce site operational risk with harmonized data, interpretable ML, and agentic alerts.</h1>
+    <p>Built on anonymized study datasets with PySpark analytics, logistic regression, and a generative explanation layer that translates signals into action.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="{{ url_for('workflow') }}">View AI Workflow</a>
+      <a class="btn secondary" href="{{ url_for('dashboard') }}">Open Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Highlights</h2>
+  <div class="grid three">
+    <div class="card">
+      <h3>Unified Data Fabric</h3>
+      <p>Automated ingestion of CPID, EDRR, SAE, coding, missing pages/labs, and visit projection feeds into a clean site-level layer.</p>
+    </div>
+    <div class="card">
+      <h3>Interpretable Risk</h3>
+      <p>Rule-based labels + logistic regression predict operational risk and surface the drivers behind each probability.</p>
+    </div>
+    <div class="card">
+      <h3>Agentic Alerts</h3>
+      <p>Rule engine flags SAE presence, query backlog, and missing data patterns; plain-English insights guide site follow-up.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Top AI Insights</h2>
+  <div id="insights">
+    {% if top_insights %}
+      <ul>
+        {% for item in top_insights %}
+          <li>
+            <strong>Site {{ item["site_id"] }}</strong> · {{ item["country"] }} · Risk {{ '%.2f'|format(item["risk_probability"]) }}<br>
+            {{ item["ai_insight"] }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No insights yet. Run the pipeline to generate analytics and ML outputs.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+

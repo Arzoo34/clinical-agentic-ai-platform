@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>AI Workflow</h1>
+  <ol class="steps">
+    <li><strong>Ingest:</strong> PySpark reads all study folders, standardizes columns, and maps subjects to sites.</li>
+    <li><strong>Engineer:</strong> Compute open issues, SAE counts, missing pages/labs, coding backlog, inactivated forms, and visit delays per site.</li>
+    <li><strong>Label:</strong> Rule-based risk scores flag high-risk sites to bootstrap interpretable ML.</li>
+    <li><strong>Train:</strong> Logistic regression learns drivers of risk; metrics exported for review.</li>
+    <li><strong>Explain:</strong> Generative layer converts metrics + probabilities into English narratives.</li>
+    <li><strong>Act:</strong> Agentic rules create alerts and Power BI-ready CSV/Parquet feeds.</li>
+  </ol>
+</section>
+{% endblock %}
+

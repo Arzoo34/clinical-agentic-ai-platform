@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h1>Results</h1>
+  {% if metrics %}
+    <div class="grid two">
+      <div class="card">
+        <h3>Model Quality</h3>
+        <p>ROC AUC: {{ '%.3f'|format(metrics.get('roc_auc', 0)) }}</p>
+        <p>Accuracy: {{ '%.3f'|format(metrics.get('accuracy', 0)) }}</p>
+        <p>Train rows: {{ metrics.get('train_rows', 0) }}, Test rows: {{ metrics.get('test_rows', 0) }}</p>
+      </div>
+      <div class="card">
+        <h3>Features Used</h3>
+        <p>{{ metrics.get('features_used', []) }}</p>
+      </div>
+    </div>
+  {% else %}
+    <p>No metrics yet. Run the pipeline to populate outputs.</p>
+  {% endif %}
+</section>
+
+<section>
+  <h2>Prediction Sample</h2>
+  {% if predictions_present %}
+    <table>
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Country</th>
+          <th>Risk Prob</th>
+          <th>Alerts</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in predictions_sample %}
+          <tr>
+            <td>{{ row.get('site_id') }}</td>
+            <td>{{ row.get('country') }}</td>
+            <td>{{ '%.2f'|format(row.get('risk_probability', 0)) }}</td>
+            <td>{{ row.get('alerts') }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Predictions will appear here after running the ML pipeline.</p>
+  {% endif %}
+</section>
+{% endblock %}
+
