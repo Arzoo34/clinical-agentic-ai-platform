@@ -2,7 +2,11 @@
 An AI-powered, insight-driven platform that unifies clinical and operational trial data in real time. It detects data quality issues, predicts operational risks, and automates monitoring using generative and agentic AI to enable faster, smarter, and proactive clinical trial decision-making.
 # Problem Statement 
 Integrated Insight-Driven Data-Flow Model for Clinical Trials
+
+
 🔍 Problem Description
+
+
 Clinical trials generate large volumes of data from multiple sources, such as:
 
 Electronic Data Capture (EDC) systems
