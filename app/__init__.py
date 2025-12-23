@@ -1,2 +1,2 @@
-"""Flask application package for the clinical trial intelligence web UI."""
+# Package marker for agentic clinical data platform.
 
