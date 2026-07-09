@@ -8,7 +8,7 @@ Shuruaat AI is an intelligent, multi-agent co-pilot platform that helps Meesho s
 
 ## 🎯 Features
 
-### 🎨 **Listing Agent**
+### 📝 **Listing Agent**
 - **AI-Powered Listing Generation**: Voice or text input → beautifully optimized product listings in Hindi/Gujarati/Tamil
 - **Return Risk Scoring**: Analyze listing gaps (missing size charts, fabric info, wash care, photos) and quantify their impact on returns
 - **Fraud Risk Detection**: PIN code-based RTO analysis + COD safety checks
@@ -30,44 +30,44 @@ Shuruaat AI is an intelligent, multi-agent co-pilot platform that helps Meesho s
 ## 🏗️ Architecture
 
 ```
-┌─────────────────┐
+┌──────────────────────────────┐
 │   React + Vite  │  Frontend (Port 5173)
 │   Tailwind CSS  │  - Multi-lingual UI
 │   Lucide Icons  │  - Voice I/O (Web Speech API)
-└────────┬────────┘
+└──────────────────┬───────────┘
          │
       HTTP API
          │
-┌────────▼────────┐
+┌──────────────────┬───────────┐
 │  FastAPI        │  Backend (Port 8000)
 │  SQLAlchemy ORM │  - 11 data models
 │  Anthropic SDK  │  - Pydantic schemas
-└────────┬────────┘
+└──────────────────┬───────────┘
          │
-┌────────▼────────────────────┐
+┌──────────────────┬──────────────────────────────────┐
 │    Agent Layer              │
-│ ┌──────────────────────────┐ │
+│ ┌──────────────────────────────────────────────┐ │
 │ │ Listing Agent            │ │
 │ │ - Text generation        │ │
 │ │ - Risk scoring (logic)   │ │
 │ │ - Fraud detection        │ │
-│ ├──────────────────────────┤ │
+│ ├──────────────────────────────────────────────┤ │
 │ │ Q&A Agent                │ │
 │ │ - Clustering (ML)        │ │
 │ │ - Reply drafting (Claude)│ │
-│ ├──────────────────────────┤ │
+│ ├──────────────────────────────────────────────┤ │
 │ │ Health Agent             │ │
 │ │ - Stats aggregation      │ │
 │ │ - Brief generation       │ │
-│ └──────────────────────────┘ │
-└────────┬────────────────────┘
+│ └──────────────────────────────────────────────┘ │
+└──────────────────┬──────────────────────────────────┘
          │
-┌────────▼────────────────────┐
+┌──────────────────┬──────────────────────────────────┐
 │  Claude 3.5 Sonnet API      │
 │  - Listing content          │
 │  - Q&A reply drafting       │
 │  - Health brief generation  │
-└────────────────────────────┘
+└──────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -217,7 +217,7 @@ All AI outputs automatically generate in seller's selected language.
 
 ---
 
-## 🛣️ Roadmap
+## 🗺️ Roadmap
 
 - [ ] Multi-language support: Bengali, Marathi, Telugu
 - [ ] WhatsApp integration for buyer notifications
