@@ -1,6 +1,6 @@
 from anthropic import Anthropic
 import json
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 client = Anthropic()
 

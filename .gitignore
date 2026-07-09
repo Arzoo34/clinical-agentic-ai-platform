@@ -1,26 +1,57 @@
-# Ignore raw datasets
-data/
-*.xlsx
-*.csv
-
-# Spark / Python
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# OS files
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
-Thumbs.db
-# Ignore provided datasets (VERY IMPORTANT)
-6932c39b908b6_detailed_problem_statements_and_datasets/
 
-# Ignore all raw data files
-*.xlsx
-*.csv
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
 
-# Python / Spark
-__pycache__/
-*.pyc
+# Frontend
+frontend/dist/
+frontend/.env
+frontend/.env.local
 
-# OS files
-.DS_Store
-Thumbs.db
+# Misc
+.cache/
+*.log
