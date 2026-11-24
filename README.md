@@ -7,28 +7,37 @@ This repository contains a multi-agent, event-driven pipeline that ingests heter
 Prerequisites: Python 3.10+, recommended inside a virtual environment.
 
 ```bash
-cd "C:\Users\akanksha dhoundiyal\Desktop\nest"
 python -m venv .venv
+# Windows:
 .venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+
 pip install -r requirements.txt
 ```
 
-Run the demo UI:
+Run the test suite:
+
+```bash
+pytest
+```
+
+Run the interactive Streamlit UI:
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-Default demo data points to the extracted folder `Data for problem Statement 1/QC Anonymized Study Files`. You can also upload another ZIP of Excel files directly in the UI.
+Demo data is located in `data/demo` (and mirrored via junction to `Data for problem Statement 1/QC Anonymized Study Files`). You can also upload a custom ZIP of Excel files directly in the UI.
 
 ## Project Layout
 
-- `app/agents/`: One file per agent (ingestion, schema harmonization, data quality, operational, anomaly, risk scoring, insights, alerts).
-- `app/core/`: Event and storage utilities.
-- `app/config.py`: Config loader and defaults.
+- `app/agents/`: One file per agent (ingestion, schema harmonization, quality, operational, anomaly, risk scoring, insights, alerts, base).
+- `app/core/`: Event bus, config loader, logging, models, and storage utilities.
 - `config/config.yaml`: Thresholds, required columns, mappings, and paths.
-- `data/`: Local filesystem storage (raw, staging, curated, logs).
-- `streamlit_app.py`: Streamlit UI and orchestrated demo run.
+- `data/`: Local filesystem storage (`raw/`, `staging/`, `curated/`, `logs/`, `demo/`).
+- `streamlit_app.py`: Streamlit UI and orchestrated demo dashboard.
+- `tests/test_platform.py`: Comprehensive automated test suite.
 
 ## Pipeline (Orchestrated)
 
