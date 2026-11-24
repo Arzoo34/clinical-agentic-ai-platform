@@ -143,8 +143,8 @@ class PipelineOrchestrator:
             self.alert_agent.execute(context)
 
             # Mark completion
-            from datetime import datetime
-            context.completed_at = datetime.utcnow().isoformat()
+            from datetime import datetime, timezone
+            context.completed_at = datetime.now(timezone.utc).isoformat()
 
             self.event_bus.publish(
                 self._create_event(
@@ -286,6 +286,19 @@ class PipelineOrchestrator:
                     "recommended_action": alert.recommended_action,
                 }
                 for alert in context.alerts
+            ],
+            "operations": [
+                {
+                    "id": kpi.kpi_id,
+                    "name": kpi.name,
+                    "metric": kpi.metric_name,
+                    "value": kpi.value,
+                    "target": kpi.target_value,
+                    "status": kpi.status,
+                    "study_id": kpi.study_id,
+                    "description": kpi.description,
+                }
+                for kpi in context.operational_kpis
             ],
             "insights": context.insights[:10],  # Top 10 insights
             "errors": context.errors,
