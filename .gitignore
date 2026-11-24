@@ -3,6 +3,10 @@ data/
 *.xlsx
 *.csv
 
+# Virtual environments & test caches
+.venv/
+.pytest_cache/
+
 # Spark / Python
 __pycache__/
 *.pyc
