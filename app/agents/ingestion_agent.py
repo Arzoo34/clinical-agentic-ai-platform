@@ -116,7 +116,13 @@ class IngestionAgent(BaseAgent):
 
     def _extract_study_id(self, file_path: Path) -> Optional[str]:
         """Extract study ID from file path."""
-        # Look for 'Study X' pattern in path
+        import re
+        # First check clean 'Study N' pattern in path or filename
+        match = re.search(r"\b(Study\s*\d+)\b", str(file_path), re.IGNORECASE)
+        if match:
+            return match.group(1).title()
+
+        # Look for 'Study X' pattern in path parts
         for part in file_path.parts:
             if part.lower().startswith("study"):
                 return part
