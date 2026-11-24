@@ -84,10 +84,16 @@ class OpenAIInsightGenerator(InsightGenerator):
         """Initialize with OpenAI API key."""
         self.api_key = api_key
         self.model = model
+        from app.core.logging import StructuredLogger
+        self.logger = StructuredLogger("openai_insight")
         try:
             import openai
             self.openai = openai
-            openai.api_key = api_key
+            if hasattr(openai, "OpenAI"):
+                self.client = openai.OpenAI(api_key=api_key)
+            else:
+                openai.api_key = api_key
+                self.client = None
         except ImportError:
             raise ImportError("openai package required for OpenAI insight generation")
 
@@ -105,22 +111,31 @@ class OpenAIInsightGenerator(InsightGenerator):
         )
 
         try:
-            response = self.openai.ChatCompletion.create(
-                model=self.model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "You are a clinical trial data expert. "
-                            "Provide concise, actionable insights about data quality issues. "
-                            "Be specific but avoid medical claims. Focus on data integrity."
-                        ),
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_tokens=150,
-            )
+            messages = [
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a clinical trial data expert. "
+                        "Provide concise, actionable insights about data quality issues. "
+                        "Be specific but avoid medical claims. Focus on data integrity."
+                    ),
+                },
+                {"role": "user", "content": prompt},
+            ]
+            if self.client:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=0.3,
+                    max_tokens=150,
+                )
+            else:
+                response = self.openai.ChatCompletion.create(
+                    model=self.model,
+                    messages=messages,
+                    temperature=0.3,
+                    max_tokens=150,
+                )
             return response.choices[0].message.content.strip()
         except Exception as e:
             # Fallback to local generator on API error
