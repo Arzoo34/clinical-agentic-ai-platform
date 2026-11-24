@@ -3,7 +3,7 @@ paths:
   staging_root: "data/staging"
   curated_root: "data/curated"
   logs_root: "data/logs"
-  demo_data_root: "Data for problem Statement 1/QC Anonymized Study Files"
+  demo_data_root: "data/demo"
 schema:
   alias_map:
     subject id: subject_id
