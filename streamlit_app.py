@@ -68,9 +68,10 @@ with st.sidebar:
             key="zip_upload",
         )
     else:
+        default_demo = "data/demo" if Path("data/demo").exists() else "Data for problem Statement 1/QC Anonymized Study Files"
         demo_path = st.text_input(
             "Demo data path:",
-            value="Data for problem Statement 1/QC Anonymized Study Files",
+            value=default_demo,
             key="demo_path",
         )
         demo_dir = Path(demo_path)
@@ -387,9 +388,41 @@ if st.session_state.pipeline_results and st.session_state.pipeline_results.get("
             st.info("No insights generated yet.")
     
     with tab6:
-        st.subheader("Operational KPIs")
-        st.info("Operational metrics summary and trends.")
-        # Additional operational dashboard content can be added here
+        st.subheader("Operational KPIs & Metrics")
+        operations = results.get("operations", [])
+        if operations:
+            ops_df = pd.DataFrame(operations)
+            
+            # Status summary
+            status_counts = ops_df["status"].value_counts()
+            fig = px.pie(
+                values=status_counts.values,
+                names=status_counts.index,
+                title="Operational KPI Health Status",
+                color=status_counts.index,
+                color_discrete_map={
+                    "normal": "#4caf50",
+                    "warning": "#ff9800",
+                    "critical": "#ff1744",
+                },
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+            # KPI Details Table
+            st.subheader("KPI Overview")
+            display_cols = ["name", "metric", "value", "status", "study_id", "description"]
+            st.dataframe(ops_df[[c for c in display_cols if c in ops_df.columns]], use_container_width=True)
+
+            # Download option
+            csv = ops_df.to_csv(index=False)
+            st.download_button(
+                "📥 Download Operational KPIs as CSV",
+                csv,
+                "operational_kpis.csv",
+                "text/csv",
+            )
+        else:
+            st.info("No operational KPIs recorded. Run the pipeline to view metrics.")
 
 else:
     if st.session_state.pipeline_results and not st.session_state.pipeline_results.get("success"):
